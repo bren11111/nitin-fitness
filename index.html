@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Fitness Coach & Nutritionist | Online Coaching — Dubai</title>
+<title>Nitin Mishra Fitness | Online Fitness &amp; Nutrition Coaching</title>
 <meta name="description" content="Online fitness coaching and nutrition programs for fat loss, muscle gain, and strength — trusted by 300+ clients worldwide.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -56,12 +56,13 @@
   }
   .brand-mark{
     font-family:'Bebas Neue',sans-serif;
-    font-size:22px;
-    letter-spacing:0.08em;
+    font-size:19px;
+    letter-spacing:0.04em;
     color:var(--arena);
+    white-space:nowrap;
   }
   .brand-mark span{color:var(--oro);}
-  .nav-links{display:flex;gap:34px;font-size:14px;letter-spacing:0.04em;text-transform:uppercase;font-weight:600;}
+  .nav-links{display:flex;gap:20px;font-size:13px;letter-spacing:0.03em;text-transform:uppercase;font-weight:600;white-space:nowrap;}
   .nav-links a{opacity:0.85;transition:opacity .2s, color .2s;position:relative;padding-bottom:4px;}
   .nav-links a::after{
     content:'';position:absolute;left:0;bottom:0;width:0;height:1px;
@@ -280,7 +281,16 @@
     transition:background .3s ease, transform .3s cubic-bezier(.2,.8,.2,1);
     position:relative;
     overflow:hidden;
+    display:block;
+    cursor:pointer;
+    text-decoration:none;
   }
+  .prog-cta-hint{
+    margin-top:20px;font-size:12.5px;font-weight:700;letter-spacing:0.05em;text-transform:uppercase;
+    color:var(--oro);opacity:0.85;display:flex;align-items:center;gap:6px;
+    transition:gap .25s ease;
+  }
+  .prog-card:hover .prog-cta-hint{gap:11px;}
   .prog-card::before{
     content:'';position:absolute;top:0;left:0;right:0;height:2px;
     background:var(--oro);transform:scaleX(0);transform-origin:left;
@@ -379,6 +389,72 @@
     margin-top:34px;font-size:13.5px;color:var(--arena);opacity:0.55;
     max-width:560px;
   }
+
+  /* BMI CALCULATOR */
+  .bmi{background:var(--azul-oscuro);}
+  .bmi-wrap{
+    margin-top:50px;
+    display:grid;grid-template-columns:1fr;
+    background:var(--azul);
+    border:1px solid rgba(199,162,74,0.25);
+    max-width:820px;
+  }
+  .bmi-form{padding:44px;}
+  .bmi-row{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-bottom:16px;}
+  .bmi-field{display:flex;flex-direction:column;gap:6px;}
+  .bmi-field label{
+    font-size:12px;letter-spacing:0.06em;text-transform:uppercase;font-weight:700;
+    color:var(--oro);opacity:0.9;
+  }
+  .bmi-field input, .bmi-field select{
+    background:var(--azul-oscuro);
+    border:1px solid rgba(239,230,214,0.2);
+    color:var(--arena);
+    padding:12px 14px;font-size:15px;font-family:'Inter',sans-serif;
+    border-radius:2px;outline:none;
+    transition:border-color .2s;
+  }
+  .bmi-field input:focus, .bmi-field select:focus{border-color:var(--oro);}
+  .bmi-field select option{background:var(--azul-oscuro);color:var(--arena);}
+  .bmi-field input::placeholder{color:rgba(239,230,214,0.35);}
+  .bmi-submit{
+    width:100%;margin-top:8px;
+    background:var(--oro);color:var(--azul-oscuro);
+    border:none;padding:16px 0;font-weight:700;font-size:14px;
+    letter-spacing:0.05em;text-transform:uppercase;
+    border-radius:2px;cursor:pointer;
+    transition:background .25s ease, transform .3s cubic-bezier(.34,1.56,.64,1);
+  }
+  .bmi-submit:hover{background:var(--champan);transform:translateY(-2px);}
+  .bmi-disclaimer{
+    margin-top:14px;font-size:12px;color:var(--arena);opacity:0.5;line-height:1.5;
+  }
+  .bmi-result{
+    display:none;
+    padding:44px;
+    border-top:1px solid rgba(199,162,74,0.25);
+    text-align:center;
+  }
+  .bmi-result.show{display:block;}
+  .bmi-value{
+    font-family:'Bebas Neue',sans-serif;
+    font-size:72px;color:var(--oro);line-height:1;
+  }
+  .bmi-category{
+    font-size:14px;letter-spacing:0.08em;text-transform:uppercase;font-weight:700;
+    color:var(--arena);margin-top:8px;
+  }
+  .bmi-note{
+    max-width:480px;margin:18px auto 26px;
+    font-size:14.5px;color:var(--arena);opacity:0.75;line-height:1.6;
+  }
+  .bmi-wa-btn{
+    display:inline-block;background:var(--oro);color:var(--azul-oscuro);
+    padding:15px 30px;font-weight:700;font-size:13.5px;
+    letter-spacing:0.05em;text-transform:uppercase;
+    border-radius:2px;transition:background .25s ease, transform .3s ease;
+  }
+  .bmi-wa-btn:hover{background:var(--champan);transform:translateY(-2px);}
 
   /* TRANSFORMATIONS */
   .transformations{background:var(--azul);}
@@ -596,12 +672,23 @@
   /* MOBILE */
   @media (max-width:860px){
     .nav-links{display:none;}
+    .brand-mark{font-size:15px;}
+    nav{padding:16px 18px;}
+    nav.scrolled{padding:11px 18px;}
+    .nav-cta{padding:9px 14px;font-size:11px;}
+    .lang-toggle{margin-right:10px;width:64px;height:28px;}
+    .lang-pill{width:29px;height:20px;}
+    .lang-toggle.is-hi .lang-pill{transform:translateX(29px);}
+    .lang-opt{width:29px;font-size:10px;}
     .edge-grid{grid-template-columns:repeat(2,1fr);gap:30px 16px;}
     .edge-item:nth-child(2)::after{display:none;}
     .prog-grid{grid-template-columns:1fr;}
     .prog-features{grid-template-columns:1fr;}
     .testi-grid{grid-template-columns:1fr;}
     .trans-grid{grid-template-columns:1fr;}
+    .bmi-row{grid-template-columns:1fr;}
+    .bmi-form,.bmi-result{padding:30px 24px;}
+    .bmi-value{font-size:56px;}
     .pkg-grid{grid-template-columns:1fr;}
     .split{grid-template-columns:1fr;}
     .about-photo-wrap{max-width:320px;margin:0 auto 50px;}
@@ -619,9 +706,10 @@
 <div class="progress-bar" id="progressBar"></div>
 
 <nav id="mainNav">
-  <a href="#top" class="brand-mark">NITIN<span>.</span>FIT</a>
+  <a href="#top" class="brand-mark">NITINMISHRA<span>FITNESS</span></a>
   <div class="nav-links">
     <a href="#edge" data-en="The Edge" data-hi="द एज">The Edge</a>
+    <a href="#bmi" data-en="BMI Check" data-hi="BMI चेक">BMI Check</a>
     <a href="#programs" data-en="Programs" data-hi="प्रोग्राम्स">Programs</a>
     <a href="#transformations" data-en="Results" data-hi="रिजल्ट्स">Results</a>
     <a href="#packages" data-en="Packages" data-hi="पैकेज">Packages</a>
@@ -672,12 +760,70 @@
       <div class="edge-label" data-en="Clients Trained Worldwide" data-hi="दुनियाभर में ट्रेंड क्लाइंट्स">Clients Trained Worldwide</div>
     </div>
     <div class="edge-item">
-      <div class="edge-num" data-count="65" data-suffix="K+">0</div>
+      <div class="edge-num" data-count="100" data-suffix="K+">0</div>
       <div class="edge-label" data-en="Instagram Community" data-hi="इंस्टाग्राम कम्युनिटी">Instagram Community</div>
     </div>
     <div class="edge-item">
       <div class="edge-num" data-count="1">0</div>
       <div class="edge-label" data-en="Best Physique Award" data-hi="बेस्ट फिजीक अवॉर्ड">Best Physique Award</div>
+    </div>
+  </div>
+</section>
+
+<!-- BMI CALCULATOR -->
+<section class="sec bmi" id="bmi">
+  <div class="container reveal">
+    <div class="sec-eyebrow" data-en="Free Tool" data-hi="मुफ्त टूल">Free Tool</div>
+    <h2 data-en="What's your BMI?" data-hi="आपका BMI क्या है?">What's your BMI?</h2>
+    <p class="sec-lede" data-en="A quick, free check-in — no account, no spam. Just your instant result." data-hi="एक झटपट, मुफ्त चेक-इन — कोई अकाउंट नहीं, कोई स्पैम नहीं। बस आपका तुरंत रिजल्ट।">A quick, free check-in — no account, no spam. Just your instant result.</p>
+  </div>
+  <div class="container">
+    <div class="bmi-wrap reveal">
+      <form class="bmi-form" id="bmiForm">
+        <div class="bmi-row">
+          <div class="bmi-field">
+            <label data-en="Name" data-hi="नाम">Name</label>
+            <input type="text" id="bmiName" required placeholder="Your name">
+          </div>
+          <div class="bmi-field">
+            <label data-en="Phone" data-hi="फ़ोन">Phone</label>
+            <input type="tel" id="bmiPhone" required placeholder="+971...">
+          </div>
+        </div>
+        <div class="bmi-row">
+          <div class="bmi-field">
+            <label data-en="Email" data-hi="ईमेल">Email</label>
+            <input type="email" id="bmiEmail" required placeholder="you@email.com">
+          </div>
+          <div class="bmi-field">
+            <label data-en="Gender" data-hi="लिंग">Gender</label>
+            <select id="bmiGender" required>
+              <option value="" data-en="Select" data-hi="चुनें">Select</option>
+              <option value="Female" data-en="Female" data-hi="महिला">Female</option>
+              <option value="Male" data-en="Male" data-hi="पुरुष">Male</option>
+              <option value="Other" data-en="Other" data-hi="अन्य">Other</option>
+            </select>
+          </div>
+        </div>
+        <div class="bmi-row">
+          <div class="bmi-field">
+            <label data-en="Height (cm)" data-hi="ऊंचाई (सेमी)">Height (cm)</label>
+            <input type="number" id="bmiHeight" required placeholder="175" min="100" max="230">
+          </div>
+          <div class="bmi-field">
+            <label data-en="Weight (kg)" data-hi="वज़न (किग्रा)">Weight (kg)</label>
+            <input type="number" id="bmiWeight" required placeholder="75" min="30" max="250">
+          </div>
+        </div>
+        <button type="submit" class="bmi-submit" data-en="Calculate My BMI" data-hi="मेरा BMI कैलकुलेट करें">Calculate My BMI</button>
+        <p class="bmi-disclaimer" data-en="For general awareness only — not medical advice. BMI doesn't account for muscle mass, age, or body composition." data-hi="केवल सामान्य जानकारी के लिए — यह मेडिकल सलाह नहीं है। BMI मसल मास, उम्र, या बॉडी कंपोजिशन को ध्यान में नहीं रखता।">For general awareness only — not medical advice. BMI doesn't account for muscle mass, age, or body composition.</p>
+      </form>
+      <div class="bmi-result" id="bmiResult">
+        <div class="bmi-value" id="bmiValue">0.0</div>
+        <div class="bmi-category" id="bmiCategory">—</div>
+        <p class="bmi-note" data-en="This is just one data point. A real plan looks at your full picture — goals, body composition, and lifestyle. Send your result to Nitin for a free, personalized read." data-hi="यह सिर्फ एक डेटा पॉइंट है। एक असली प्लान आपकी पूरी तस्वीर देखता है — लक्ष्य, बॉडी कंपोजिशन, और लाइफस्टाइल। एक मुफ्त, व्यक्तिगत राय के लिए अपना रिजल्ट नितिन को भेजें।">This is just one data point. A real plan looks at your full picture — goals, body composition, and lifestyle. Send your result to Nitin for a free, personalized read.</p>
+        <a href="#" id="bmiWaBtn" class="bmi-wa-btn" target="_blank" rel="noopener" data-en="Send My Result on WhatsApp" data-hi="व्हाट्सएप पर मेरा रिजल्ट भेजें">Send My Result on WhatsApp</a>
+      </div>
     </div>
   </div>
 </section>
@@ -692,26 +838,30 @@
   </div>
   <div class="container">
     <div class="prog-grid">
-      <div class="prog-card reveal">
+      <a class="prog-card reveal" href="https://wa.me/971585243210?text=Hi%20Nitin%21%20I%27m%20interested%20in%20the%20Fat%20Loss%20Transformation%20program.%20Can%20you%20tell%20me%20more%3F" target="_blank" rel="noopener">
         <div class="prog-icon">🔥</div>
         <h3 data-en="Fat Loss Transformation" data-hi="फैट लॉस ट्रांसफॉर्मेशन">Fat Loss Transformation</h3>
         <ul class="prog-features"></ul>
-      </div>
-      <div class="prog-card reveal">
+        <div class="prog-cta-hint"><span data-en="Ask on WhatsApp" data-hi="व्हाट्सएप पर पूछें">Ask on WhatsApp</span> →</div>
+      </a>
+      <a class="prog-card reveal" href="https://wa.me/971585243210?text=Hi%20Nitin%21%20I%27m%20interested%20in%20the%20Lean%20Muscle%20Gain%20program.%20Can%20you%20tell%20me%20more%3F" target="_blank" rel="noopener">
         <div class="prog-icon">💪</div>
         <h3 data-en="Lean Muscle Gain" data-hi="लीन मसल गेन">Lean Muscle Gain</h3>
         <ul class="prog-features"></ul>
-      </div>
-      <div class="prog-card reveal">
+        <div class="prog-cta-hint"><span data-en="Ask on WhatsApp" data-hi="व्हाट्सएप पर पूछें">Ask on WhatsApp</span> →</div>
+      </a>
+      <a class="prog-card reveal" href="https://wa.me/971585243210?text=Hi%20Nitin%21%20I%27m%20interested%20in%20the%20Body%20Recomposition%20program.%20Can%20you%20tell%20me%20more%3F" target="_blank" rel="noopener">
         <div class="prog-icon">⚖️</div>
         <h3 data-en="Body Recomposition" data-hi="बॉडी रीकंपोजिशन">Body Recomposition</h3>
         <ul class="prog-features"></ul>
-      </div>
-      <div class="prog-card reveal">
+        <div class="prog-cta-hint"><span data-en="Ask on WhatsApp" data-hi="व्हाट्सएप पर पूछें">Ask on WhatsApp</span> →</div>
+      </a>
+      <a class="prog-card reveal" href="https://wa.me/971585243210?text=Hi%20Nitin%21%20I%27m%20interested%20in%20the%20Elite%201-on-1%20Coaching%20program.%20Can%20you%20tell%20me%20more%3F" target="_blank" rel="noopener">
         <div class="prog-icon">🏆</div>
         <h3 data-en="Elite 1-on-1 Coaching" data-hi="एलीट 1-ऑन-1 कोचिंग">Elite 1-on-1 Coaching</h3>
         <ul class="prog-features"></ul>
-      </div>
+        <div class="prog-cta-hint"><span data-en="Ask on WhatsApp" data-hi="व्हाट्सएप पर पूछें">Ask on WhatsApp</span> →</div>
+      </a>
     </div>
   </div>
 </section>
@@ -757,7 +907,7 @@
         <div class="pkg-price">&#8377;14,999</div>
         <div class="pkg-price-usd">&#8776; $155 USD</div>
         <ul class="pkg-features"></ul>
-        <a href="#contact" class="pkg-cta" data-en="Get Started" data-hi="शुरू करें">Get Started</a>
+        <a href="https://wa.me/971585243210?text=Hi%20Nitin%21%20I%27m%20interested%20in%20the%20Silver%20%283%20Months%29%20package.%20Can%20you%20tell%20me%20more%3F" class="pkg-cta" target="_blank" rel="noopener" data-en="Get Started" data-hi="शुरू करें">Get Started</a>
       </div>
       <div class="pkg-card featured reveal">
         <div class="pkg-badge" data-en="Most Popular" data-hi="सबसे लोकप्रिय">Most Popular</div>
@@ -766,7 +916,7 @@
         <div class="pkg-price">&#8377;24,999</div>
         <div class="pkg-price-usd">&#8776; $259 USD</div>
         <ul class="pkg-features"></ul>
-        <a href="#contact" class="pkg-cta" data-en="Get Started" data-hi="शुरू करें">Get Started</a>
+        <a href="https://wa.me/971585243210?text=Hi%20Nitin%21%20I%27m%20interested%20in%20the%20Gold%20%286%20Months%29%20package.%20Can%20you%20tell%20me%20more%3F" class="pkg-cta" target="_blank" rel="noopener" data-en="Get Started" data-hi="शुरू करें">Get Started</a>
       </div>
       <div class="pkg-card reveal">
         <div class="pkg-tier" data-en="Platinum" data-hi="प्लैटिनम">Platinum</div>
@@ -774,7 +924,7 @@
         <div class="pkg-price">&#8377;39,999</div>
         <div class="pkg-price-usd">&#8776; $414 USD</div>
         <ul class="pkg-features"></ul>
-        <a href="#contact" class="pkg-cta" data-en="Get Started" data-hi="शुरू करें">Get Started</a>
+        <a href="https://wa.me/971585243210?text=Hi%20Nitin%21%20I%27m%20interested%20in%20the%20Platinum%20%2812%20Months%29%20package.%20Can%20you%20tell%20me%20more%3F" class="pkg-cta" target="_blank" rel="noopener" data-en="Get Started" data-hi="शुरू करें">Get Started</a>
       </div>
     </div>
     <!-- Conversión USD aproximada a ₹96.6/USD (julio 2026) — confirmar antes de publicar, el tipo de cambio fluctúa -->
@@ -924,8 +1074,7 @@
       <a href="https://wa.me/971585243210" class="btn-primary" target="_blank" rel="noopener" data-en="Message on WhatsApp" data-hi="व्हाट्सएप पर मैसेज करें">Message on WhatsApp</a>
     </div>
     <div class="socials">
-      <!-- USUARIO DE INSTAGRAM AQUÍ -->
-      <a href="#" data-en="Instagram" data-hi="इंस्टाग्राम">Instagram</a>
+      <a href="https://www.instagram.com/nitinmishrafitness" target="_blank" rel="noopener" data-en="Instagram" data-hi="इंस्टाग्राम">Instagram</a>
       <!-- URL DE TARJETA DIGITAL AQUÍ -->
       <a href="#" data-en="All Links" data-hi="सभी लिंक्स">All Links</a>
     </div>
@@ -1079,6 +1228,53 @@
         card.style.setProperty('--rx','0deg');
         card.style.setProperty('--ry','0deg');
       });
+    });
+  }
+
+  // ---- BMI CALCULATOR ----
+  const bmiForm = document.getElementById('bmiForm');
+  const bmiResult = document.getElementById('bmiResult');
+  const bmiValueEl = document.getElementById('bmiValue');
+  const bmiCategoryEl = document.getElementById('bmiCategory');
+  const bmiWaBtn = document.getElementById('bmiWaBtn');
+  const WA_NUMBER = '971585243210';
+
+  if(bmiForm){
+    bmiForm.addEventListener('submit', function(e){
+      e.preventDefault();
+      const name = document.getElementById('bmiName').value.trim();
+      const phone = document.getElementById('bmiPhone').value.trim();
+      const email = document.getElementById('bmiEmail').value.trim();
+      const gender = document.getElementById('bmiGender').value;
+      const heightCm = parseFloat(document.getElementById('bmiHeight').value);
+      const weightKg = parseFloat(document.getElementById('bmiWeight').value);
+      if(!heightCm || !weightKg) return;
+
+      const heightM = heightCm / 100;
+      const bmi = weightKg / (heightM * heightM);
+      const bmiRounded = bmi.toFixed(1);
+
+      let category;
+      const lang = document.documentElement.lang === 'hi' ? 'hi' : 'en';
+      if(bmi < 18.5) category = lang==='hi' ? 'कम वज़न' : 'Underweight';
+      else if(bmi < 25) category = lang==='hi' ? 'सामान्य वज़न' : 'Normal weight';
+      else if(bmi < 30) category = lang==='hi' ? 'अधिक वज़न' : 'Overweight';
+      else category = lang==='hi' ? 'ओबेस' : 'Obese';
+
+      bmiValueEl.textContent = bmiRounded;
+      bmiCategoryEl.textContent = category;
+      bmiResult.classList.add('show');
+      bmiResult.scrollIntoView({behavior:'smooth', block:'center'});
+
+      const waText = 'Hi Nitin! I just calculated my BMI on your site.\n\n'
+        + 'Name: ' + name + '\n'
+        + 'Gender: ' + gender + '\n'
+        + 'Height: ' + heightCm + ' cm\n'
+        + 'Weight: ' + weightKg + ' kg\n'
+        + 'BMI: ' + bmiRounded + ' (' + category + ')\n'
+        + 'Email: ' + email + '\n\n'
+        + 'I\'d like a personalized read on this and more info about coaching.';
+      bmiWaBtn.href = 'https://wa.me/' + WA_NUMBER + '?text=' + encodeURIComponent(waText);
     });
   }
 </script>
