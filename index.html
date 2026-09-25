@@ -473,6 +473,43 @@
     width:100%;display:block;
   }
 
+  /* DIGITAL GUIDES */
+  .guides{background:var(--azul);}
+  .guides-grid{
+    display:grid;grid-template-columns:repeat(2,1fr);gap:26px;
+    margin-top:56px;
+  }
+  .guide-card{
+    background:var(--azul-oscuro);
+    border:1px solid rgba(199,162,74,0.22);
+    padding:38px 34px;
+    display:flex;flex-direction:column;
+    transition:transform .3s cubic-bezier(.2,.8,.2,1), border-color .25s;
+  }
+  .guide-card:hover{transform:translateY(-6px);border-color:var(--oro);}
+  .guide-icon{font-size:32px;margin-bottom:14px;}
+  .guide-card h3{
+    font-family:'Bebas Neue',sans-serif;
+    font-size:28px;color:var(--arena);letter-spacing:0.02em;margin-bottom:8px;
+  }
+  .guide-desc{
+    font-size:14.5px;color:var(--arena);opacity:0.75;line-height:1.6;
+    flex-grow:1;margin-bottom:20px;
+  }
+  .guide-price{
+    font-family:'Bebas Neue',sans-serif;
+    font-size:32px;color:var(--oro);margin-bottom:18px;
+  }
+  .guide-price span{font-size:13px;font-family:'Inter',sans-serif;color:var(--arena);opacity:0.6;font-weight:500;}
+  .guide-cta{
+    display:block;text-align:center;
+    background:var(--oro);color:var(--azul-oscuro);
+    padding:14px 0;font-weight:700;font-size:13px;
+    letter-spacing:0.05em;text-transform:uppercase;
+    border-radius:2px;transition:background .25s ease, transform .3s ease;
+  }
+  .guide-cta:hover{background:var(--champan);transform:translateY(-2px);}
+
   /* TESTIMONIALS */
   .testimonials{background:var(--azul-oscuro);}
   .testi-grid{
@@ -691,6 +728,7 @@
     .bmi-form,.bmi-result{padding:30px 24px;}
     .bmi-value{font-size:56px;}
     .pkg-grid{grid-template-columns:1fr;}
+    .guides-grid{grid-template-columns:1fr;}
     .split{grid-template-columns:1fr;}
     .about-photo-wrap{max-width:320px;margin:0 auto 50px;}
     .process-grid{grid-template-columns:1fr;gap:44px;}
@@ -714,6 +752,7 @@
     <a href="#programs" data-en="Programs" data-hi="प्रोग्राम्स">Programs</a>
     <a href="#transformations" data-en="Results" data-hi="रिजल्ट्स">Results</a>
     <a href="#packages" data-en="Packages" data-hi="पैकेज">Packages</a>
+    <a href="#guides" data-en="Guides" data-hi="गाइड्स">Guides</a>
     <a href="#testimonials" data-en="Reviews" data-hi="रिव्यू">Reviews</a>
     <a href="#process" data-en="Process" data-hi="प्रोसेस">Process</a>
     <a href="#philosophy" data-en="Philosophy" data-hi="फिलॉसफी">Philosophy</a>
@@ -903,33 +942,57 @@
   <div class="container">
     <div class="pkg-grid">
       <div class="pkg-card reveal">
-        <div class="pkg-tier" data-en="Silver" data-hi="सिल्वर">Silver</div>
-        <h3 data-en="3 Months" data-hi="3 महीने">3 Months</h3>
-        <div class="pkg-price">&#8377;14,999</div>
-        <div class="pkg-price-usd">&#8776; $155 USD</div>
+        <div class="pkg-tier" data-en="Starter" data-hi="स्टार्टर">Starter</div>
+        <h3 data-en="1 Month" data-hi="1 महीना">1 Month</h3>
+        <div class="pkg-price">$199 <span>USD</span></div>
         <ul class="pkg-features"></ul>
-        <a href="https://wa.me/971585243210?text=Hi%20Nitin%21%20I%27m%20interested%20in%20the%20Silver%20%283%20Months%29%20package.%20Can%20you%20tell%20me%20more%3F" class="pkg-cta" target="_blank" rel="noopener" data-en="Get Started" data-hi="शुरू करें">Get Started</a>
+        <a href="https://wa.me/971585243210?text=Hi%20Nitin%21%20I%27m%20interested%20in%20the%201%20Month%20Starter%20package.%20Can%20you%20tell%20me%20more%3F" class="pkg-cta" target="_blank" rel="noopener" data-en="Get Started" data-hi="शुरू करें">Get Started</a>
       </div>
       <div class="pkg-card featured reveal">
         <div class="pkg-badge" data-en="Most Popular" data-hi="सबसे लोकप्रिय">Most Popular</div>
-        <div class="pkg-tier" data-en="Gold" data-hi="गोल्ड">Gold</div>
-        <h3 data-en="6 Months" data-hi="6 महीने">6 Months</h3>
-        <div class="pkg-price">&#8377;24,999</div>
-        <div class="pkg-price-usd">&#8776; $259 USD</div>
+        <h3 data-en="3 Months" data-hi="3 महीने">3 Months</h3>
+        <div class="pkg-price">$299 <span>USD</span></div>
         <ul class="pkg-features"></ul>
-        <a href="https://wa.me/971585243210?text=Hi%20Nitin%21%20I%27m%20interested%20in%20the%20Gold%20%286%20Months%29%20package.%20Can%20you%20tell%20me%20more%3F" class="pkg-cta" target="_blank" rel="noopener" data-en="Get Started" data-hi="शुरू करें">Get Started</a>
+        <a href="https://wa.me/971585243210?text=Hi%20Nitin%21%20I%27m%20interested%20in%20the%203%20Months%20package.%20Can%20you%20tell%20me%20more%3F" class="pkg-cta" target="_blank" rel="noopener" data-en="Get Started" data-hi="शुरू करें">Get Started</a>
       </div>
       <div class="pkg-card reveal">
-        <div class="pkg-tier" data-en="Platinum" data-hi="प्लैटिनम">Platinum</div>
-        <h3 data-en="12 Months" data-hi="12 महीने">12 Months</h3>
-        <div class="pkg-price">&#8377;39,999</div>
-        <div class="pkg-price-usd">&#8776; $414 USD</div>
+        <div class="pkg-tier" data-en="Best Value" data-hi="बेस्ट वैल्यू">Best Value</div>
+        <h3 data-en="6 Months" data-hi="6 महीने">6 Months</h3>
+        <div class="pkg-price">$499 <span>USD</span></div>
         <ul class="pkg-features"></ul>
-        <a href="https://wa.me/971585243210?text=Hi%20Nitin%21%20I%27m%20interested%20in%20the%20Platinum%20%2812%20Months%29%20package.%20Can%20you%20tell%20me%20more%3F" class="pkg-cta" target="_blank" rel="noopener" data-en="Get Started" data-hi="शुरू करें">Get Started</a>
+        <a href="https://wa.me/971585243210?text=Hi%20Nitin%21%20I%27m%20interested%20in%20the%206%20Months%20package.%20Can%20you%20tell%20me%20more%3F" class="pkg-cta" target="_blank" rel="noopener" data-en="Get Started" data-hi="शुरू करें">Get Started</a>
       </div>
     </div>
-    <!-- Conversión USD aproximada a ₹96.6/USD (julio 2026) — confirmar antes de publicar, el tipo de cambio fluctúa -->
-    <p class="pkg-note" data-en="Prices shown in INR, with approximate USD equivalents for international clients. All plans include direct coaching access — no generic templates." data-hi="कीमतें INR में दिखाई गई हैं, अंतरराष्ट्रीय क्लाइंट्स के लिए अनुमानित USD के साथ। सभी प्लान में सीधा कोचिंग एक्सेस शामिल है — कोई सामान्य टेम्पलेट नहीं।">Prices shown in INR, with approximate USD equivalents for international clients. All plans include direct coaching access — no generic templates.</p>
+    <p class="pkg-note" data-en="All prices in USD. All plans include direct coaching access — no generic templates." data-hi="सभी कीमतें USD में हैं। सभी प्लान में सीधा कोचिंग एक्सेस शामिल है — कोई सामान्य टेम्पलेट नहीं।">All prices in USD. All plans include direct coaching access — no generic templates.</p>
+  </div>
+</section>
+
+<!-- DIGITAL GUIDES -->
+<section class="sec guides" id="guides">
+  <div class="container reveal">
+    <div class="sec-eyebrow" data-en="Not Ready for Coaching Yet?" data-hi="अभी कोचिंग के लिए तैयार नहीं?">Not Ready for Coaching Yet?</div>
+    <h2 data-en="Start with a guide." data-hi="एक गाइड से शुरू करें.">Start with a guide.</h2>
+    <p class="sec-lede" data-en="Two ways to get started on your own, at a fraction of the cost." data-hi="अपनी गति से शुरू करने के दो तरीके, बहुत कम कीमत में।">Two ways to get started on your own, at a fraction of the cost.</p>
+  </div>
+  <div class="container">
+    <div class="guides-grid">
+      <div class="guide-card reveal">
+        <div class="guide-icon">📘</div>
+        <h3 data-en="Starter Guide" data-hi="स्टार्टर गाइड">Starter Guide</h3>
+        <p class="guide-desc" data-en="A ready-made fat loss & muscle gain guide — training structure and nutrition basics to get moving right away." data-hi="एक तैयार फैट लॉस और मसल गेन गाइड — तुरंत शुरू करने के लिए ट्रेनिंग स्ट्रक्चर और न्यूट्रिशन बेसिक्स।">A ready-made fat loss & muscle gain guide — training structure and nutrition basics to get moving right away.</p>
+        <div class="guide-price">$9 <span>USD</span></div>
+        <!-- PAYHIP LINK AQUÍ: reemplazar # por el link de checkout de Payhip -->
+        <a href="#" class="guide-cta" target="_blank" rel="noopener" data-en="Get the Guide" data-hi="गाइड लें">Get the Guide</a>
+      </div>
+      <div class="guide-card reveal">
+        <div class="guide-icon">📗</div>
+        <h3 data-en="Custom Guide" data-hi="कस्टम गाइड">Custom Guide</h3>
+        <p class="guide-desc" data-en="Built around your goals, body, and schedule — a personalized plan generated just for you, not a template." data-hi="आपके लक्ष्यों, शरीर और शेड्यूल के अनुसार बनी — सिर्फ आपके लिए तैयार एक व्यक्तिगत योजना, कोई टेम्पलेट नहीं।">Built around your goals, body, and schedule — a personalized plan generated just for you, not a template.</p>
+        <div class="guide-price">$15 <span>USD</span></div>
+        <!-- PAYHIP LINK AQUÍ: reemplazar # por el link de checkout de Payhip -->
+        <a href="#" class="guide-cta" target="_blank" rel="noopener" data-en="Get My Guide" data-hi="मेरी गाइड लें">Get My Guide</a>
+      </div>
+    </div>
   </div>
 </section>
 
@@ -1153,8 +1216,8 @@
   // ---- LANGUAGE TOGGLE (EN / HI) ----
   const progFeaturesEN = ["Personalized diet plan","Workout plan","Weekly check-ins","Unlimited plan updates","WhatsApp support","Form analysis","Progress tracking","Supplement guidance"];
   const progFeaturesHI = ["व्यक्तिगत डाइट प्लान","वर्कआउट प्लान","साप्ताहिक चेक-इन","अनलिमिटेड प्लान अपडेट्स","व्हाट्सएप सपोर्ट","फॉर्म एनालिसिस","प्रोग्रेस ट्रैकिंग","सप्लीमेंट गाइडेंस"];
-  const pkgFeaturesEN = ["Weekly progress review","Habit coaching","Unlimited plan updates","Macro adjustments","Video exercise library","Direct WhatsApp support (working hours)"];
-  const pkgFeaturesHI = ["साप्ताहिक प्रोग्रेस रिव्यू","हैबिट कोचिंग","अनलिमिटेड प्लान अपडेट्स","मैक्रो एडजस्टमेंट्स","वीडियो एक्सरसाइज लाइब्रेरी","सीधा व्हाट्सएप सपोर्ट (कार्य समय में)"];
+  const pkgFeaturesEN = ["Weekly progress review","Habit coaching","Unlimited plan updates","Macro adjustments","Exercise library","Direct WhatsApp support (working hours)"];
+  const pkgFeaturesHI = ["साप्ताहिक प्रोग्रेस रिव्यू","हैबिट कोचिंग","अनलिमिटेड प्लान अपडेट्स","मैक्रो एडजस्टमेंट्स","एक्सरसाइज लाइब्रेरी","सीधा व्हाट्सएप सपोर्ट (कार्य समय में)"];
 
   function renderFeatureLists(lang){
     document.querySelectorAll('.prog-features').forEach(ul=>{
