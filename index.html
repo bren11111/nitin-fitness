@@ -685,6 +685,44 @@
     .cta-row{flex-direction:column;}
     .btn-primary,.btn-secondary{text-align:center;}
   }
+
+
+  /* PAYMENT THANK-YOU PAGE */
+  #paymentThankYou{
+    position:fixed;inset:0;z-index:1000;
+    display:none;align-items:center;justify-content:center;
+    padding:28px;background:var(--azul-oscuro);
+    text-align:center;
+  }
+  #paymentThankYou.show{display:flex;}
+  .thank-you-card{
+    width:min(620px,100%);padding:52px 32px;
+    border:1px solid rgba(199,162,74,.45);
+    background:linear-gradient(145deg,rgba(15,28,46,.98),rgba(11,20,34,.98));
+    box-shadow:0 25px 80px rgba(0,0,0,.5);
+  }
+  .thank-you-icon{
+    width:76px;height:76px;margin:0 auto 24px;
+    border:2px solid var(--oro);border-radius:50%;
+    display:flex;align-items:center;justify-content:center;
+    color:var(--oro);font-size:38px;font-weight:800;
+  }
+  .thank-you-card h1{
+    font-size:clamp(42px,8vw,68px);margin-bottom:18px;color:var(--arena);
+  }
+  .thank-you-card p{
+    max-width:500px;margin:0 auto 12px;
+    color:rgba(239,230,214,.8);line-height:1.7;
+  }
+  .thank-you-payment-id{
+    margin:20px auto 28px!important;color:var(--oro)!important;
+    font-size:13px;word-break:break-all;
+  }
+  .thank-you-home{
+    display:inline-block;padding:13px 25px;
+    background:var(--oro);color:var(--azul-oscuro);
+    font-weight:800;text-transform:uppercase;letter-spacing:.05em;
+  }
 </style>
 
 <!-- Meta Pixel Code -->
@@ -706,6 +744,19 @@ src="https://www.facebook.com/tr?id=1842485520506469&ev=PageView&noscript=1"
 <!-- End Meta Pixel Code -->
 </head>
 <body>
+
+<!-- PAYMENT THANK-YOU PAGE -->
+<section id="paymentThankYou" aria-hidden="true">
+  <div class="thank-you-card" role="status" aria-live="polite">
+    <div class="thank-you-icon">✓</div>
+    <h1>Thank You!</h1>
+    <p><strong>Payment captured successfully.</strong></p>
+    <p>Thank you for choosing Nitin Mishra Fitness. Your payment has been received successfully. We’ll contact you shortly with the next steps for your coaching program.</p>
+    <p class="thank-you-payment-id" id="thankYouPaymentId"></p>
+    <a class="thank-you-home" href="./">Back to Website</a>
+  </div>
+</section>
+
 <div class="loader" id="pageLoader">
   <div class="loader-mark">NITINMISHRA<span>FITNESS</span><span class="loader-dot"></span></div>
 </div>
@@ -851,21 +902,21 @@ src="https://www.facebook.com/tr?id=1842485520506469&ev=PageView&noscript=1"
         <h3 data-en="1 Month" data-hi="1 महीना">1 Month</h3>
         <div class="pkg-price">$199 <span>USD</span></div>
         <ul class="pkg-features"></ul>
-        <a href="#packages" class="pkg-cta" data-package="starter" role="button" data-en="Get Started" data-hi="शुरू करें">Get Started</a>
+        <a href="https://wa.me/971585243210?text=Hi%20Nitin%21%20I%27m%20interested%20in%20the%201%20Month%20Starter%20package.%20Can%20you%20tell%20me%20more%3F" class="pkg-cta" target="_blank" rel="noopener" data-en="Get Started" data-hi="शुरू करें">Get Started</a>
       </div>
       <div class="pkg-card featured reveal">
         <div class="pkg-badge" data-en="Most Popular" data-hi="सबसे लोकप्रिय">Most Popular</div>
         <h3 data-en="3 Months" data-hi="3 महीने">3 Months</h3>
         <div class="pkg-price">$299 <span>USD</span></div>
         <ul class="pkg-features"></ul>
-        <a href="#packages" class="pkg-cta" data-package="quarter" role="button" data-en="Get Started" data-hi="शुरू करें">Get Started</a>
+        <a href="https://rzp.io/rzp/4NwZotmq" class="pkg-cta" target="_blank" rel="noopener" data-en="Get Started" data-hi="शुरू करें">Get Started</a>
       </div>
       <div class="pkg-card reveal">
         <div class="pkg-tier" data-en="Best Value" data-hi="बेस्ट वैल्यू">Best Value</div>
         <h3 data-en="6 Months" data-hi="6 महीने">6 Months</h3>
         <div class="pkg-price">$499 <span>USD</span></div>
         <ul class="pkg-features"></ul>
-        <a href="#packages" class="pkg-cta" data-package="half" role="button" data-en="Get Started" data-hi="शुरू करें">Get Started</a>
+        <a href="https://wa.me/971585243210?text=Hi%20Nitin%21%20I%27m%20interested%20in%20the%206%20Months%20package.%20Can%20you%20tell%20me%20more%3F" class="pkg-cta" target="_blank" rel="noopener" data-en="Get Started" data-hi="शुरू करें">Get Started</a>
       </div>
     </div>
     <p class="pkg-note" data-en="All prices in USD. All plans include direct coaching access — no generic templates." data-hi="सभी कीमतें USD में हैं। सभी प्लान में सीधा कोचिंग एक्सेस शामिल है — कोई सामान्य टेम्पलेट नहीं।">All prices in USD. All plans include direct coaching access — no generic templates.</p>
@@ -1184,6 +1235,52 @@ src="https://www.facebook.com/tr?id=1842485520506469&ev=PageView&noscript=1"
     });
   }
 
+
+
+  // ---- RAZORPAY PAYMENT SUCCESS / THANK-YOU ----
+  // Razorpay Payment Link should be configured to redirect back to this page after
+  // a successful payment. Razorpay normally supplies payment-link status and ID
+  // parameters in the callback URL.
+  (function handleRazorpayPaymentSuccess(){
+    const params = new URLSearchParams(window.location.search);
+    const paymentLinkStatus = (params.get('razorpay_payment_link_status') || '').toLowerCase();
+    const paymentStatus = (params.get('payment') || '').toLowerCase();
+    const paymentId = params.get('razorpay_payment_id') || '';
+
+    // Show the thank-you page only for a paid/success callback.
+    const paymentCaptured = paymentLinkStatus === 'paid' || paymentStatus === 'success';
+    if(!paymentCaptured) return;
+
+    const thankYouPage = document.getElementById('paymentThankYou');
+    const thankYouPaymentId = document.getElementById('thankYouPaymentId');
+    if(!thankYouPage) return;
+
+    if(paymentId){
+      thankYouPaymentId.textContent = 'Payment ID: ' + paymentId;
+    }else{
+      thankYouPaymentId.textContent = '';
+    }
+
+    thankYouPage.classList.add('show');
+    thankYouPage.setAttribute('aria-hidden','false');
+    document.body.style.overflow='hidden';
+
+    // GA4 purchase event. This records the successful return; actual payment
+    // verification should still be done server-side/webhook in production.
+    if(typeof gtag === 'function'){
+      const amountMap = { '199':199, '299':299, '499':499 };
+      const amountParam = params.get('amount');
+      const value = amountMap[String(amountParam)] || Number(amountParam) || 0;
+      if(value > 0){
+        gtag('event','purchase',{
+          transaction_id: paymentId,
+          currency:'USD',
+          value:value
+        });
+      }
+    }
+  })();
+
   // ---- PAGE LOADER ----
   const pageLoader = document.getElementById('pageLoader');
   if(pageLoader){
@@ -1195,140 +1292,5 @@ src="https://www.facebook.com/tr?id=1842485520506469&ev=PageView&noscript=1"
   }
 </script>
 
-
-<!-- Razorpay checkout -->
-<script src="https://checkout.razorpay.com/v1/checkout.js"></script>
-<script>
-(function(){
-  function toast(msg){
-    var t=document.getElementById('rzp-toast');
-    if(!t){
-      t=document.createElement('div');t.id='rzp-toast';
-      t.style.cssText='position:fixed;left:50%;bottom:28px;transform:translateX(-50%);max-width:90vw;background:#0B1422;color:#EFE6D6;border:1px solid #C7A24A;padding:14px 22px;border-radius:10px;font:500 14px Inter,sans-serif;z-index:99999;box-shadow:0 10px 30px rgba(0,0,0,.5);display:none;text-align:center';
-      document.body.appendChild(t);
-    }
-    t.textContent=msg;t.style.display='block';
-    clearTimeout(t._h);t._h=setTimeout(function(){t.style.display='none';},6000);
-  }
-  function setBusy(btn,busy){
-    if(busy){btn._label=btn.textContent;btn.textContent='Please wait...';btn.style.pointerEvents='none';btn.style.opacity='.7';}
-    else{btn.textContent=btn._label||btn.textContent;btn.style.pointerEvents='';btn.style.opacity='';}
-  }
-  async function startCheckout(pkg,btn){
-    setBusy(btn,true);
-    try{
-      var r=await fetch('/api/razorpay?action=create',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({package:pkg})});
-      var order=await r.json();
-      if(!r.ok) throw new Error(order.error||'Could not start payment');
-      if(typeof Razorpay==='undefined') throw new Error('Payment window failed to load. Please refresh and try again.');
-      var rzp=new Razorpay({
-        key:order.key_id,
-        amount:order.amount,
-        currency:order.currency,
-        order_id:order.order_id,
-        name:'Nitin Mishra Fitness',
-        description:order.package_name,
-        theme:{color:'#C7A24A'},
-        handler:async function(resp){
-          try{
-            var v=await fetch('/api/razorpay?action=verify',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({
-              razorpay_payment_id:resp.razorpay_payment_id,
-              razorpay_order_id:resp.razorpay_order_id,
-              razorpay_signature:resp.razorpay_signature
-            })});
-            var data=await v.json();
-            if(!v.ok||!data.success) throw new Error(data.error||'Verification failed');
-            try{sessionStorage.setItem('nm_order',JSON.stringify({
-              payment_id:data.payment_id,order_id:data.order_id,
-              value:data.amount/100,currency:data.currency,item:data.package_name,package:data.package
-            }));}catch(e){}
-            window.nmShowThankYou(JSON.parse(sessionStorage.getItem('nm_order')||'null'));setBusy(btn,false);
-          }catch(e){
-            toast('Payment received but we could not confirm it automatically. Please WhatsApp us with payment ID '+resp.razorpay_payment_id);
-            setBusy(btn,false);
-          }
-        },
-        modal:{ondismiss:function(){toast('Payment cancelled. You can try again anytime.');setBusy(btn,false);}}
-      });
-      rzp.on('payment.failed',function(f){
-        toast('Payment failed: '+((f.error&&f.error.description)||'please try again'));
-        setBusy(btn,false);
-      });
-      rzp.open();
-      btn.style.pointerEvents='';btn.style.opacity='';btn.textContent=btn._label||btn.textContent;
-    }catch(e){
-      toast(e.message||'Something went wrong. Please try again.');
-      setBusy(btn,false);
-    }
-  }
-  document.querySelectorAll('.pkg-cta[data-package]').forEach(function(b){
-    b.addEventListener('click',function(e){e.preventDefault();startCheckout(b.getAttribute('data-package'),b);});
-  });
-})();
-</script>
-
-<!-- THANK YOU SCREEN (shown after verified payment at /?payment=success) -->
-<style>
-#ty-overlay{display:none;position:fixed;inset:0;z-index:100000;background:#0B1422;align-items:center;justify-content:center;padding:24px;overflow:auto;}
-#ty-overlay .ty-card{max-width:560px;width:100%;text-align:center;border:1px solid rgba(199,162,74,.35);border-radius:16px;padding:48px 32px;background:rgba(255,255,255,.03);color:#EFE6D6;font-family:Inter,sans-serif;}
-#ty-overlay .ty-tick{width:72px;height:72px;border-radius:50%;background:#C7A24A;color:#0B1422;font-size:38px;display:flex;align-items:center;justify-content:center;margin:0 auto 24px;}
-#ty-overlay h1{font-family:'Bebas Neue',sans-serif;font-size:56px;letter-spacing:.03em;line-height:1;margin-bottom:12px;color:#E9D8A6;}
-#ty-overlay p{opacity:.85;line-height:1.6;margin-bottom:10px;}
-#ty-overlay .ty-ref{margin:22px 0;font-size:13px;opacity:.65;word-break:break-all;}
-#ty-overlay .ty-btn{display:inline-block;margin-top:14px;padding:14px 28px;border-radius:999px;background:#C7A24A;color:#0B1422;font-weight:700;text-decoration:none;cursor:pointer;border:1px solid #C7A24A;}
-#ty-overlay .ty-btn.alt{background:transparent;color:#EFE6D6;margin-left:8px;}
-</style>
-<div id="ty-overlay">
-  <div class="ty-card">
-    <div class="ty-tick">&#10003;</div>
-    <h1>Payment Successful</h1>
-    <p>Thank you! Your payment has been received and your coaching spot is confirmed.</p>
-    <p>Nitin will contact you shortly on WhatsApp / email to start your onboarding.</p>
-    <div class="ty-ref" id="ty-ref"></div>
-    <a class="ty-btn" href="https://wa.me/971585243210?text=Hi%20Nitin%21%20I%20just%20completed%20my%20payment." target="_blank" rel="noopener">Message on WhatsApp</a>
-    <a class="ty-btn alt" id="ty-close">Back to Home</a>
-  </div>
-</div>
-<script>
-(function(){
-  var ov=document.getElementById('ty-overlay');
-  window.nmShowThankYou=function(order){
-    if(!order||!order.payment_id) return;
-    ov.style.display='flex';
-    document.body.style.overflow='hidden';
-    document.getElementById('ty-ref').textContent='Payment ID: '+order.payment_id;
-    // Change URL so Google/Meta can treat it as a thank-you page
-    try{history.replaceState(null,'','/?payment=success');}catch(e){}
-
-    // fire tracking once per payment
-    var k='nm_fired_'+order.payment_id, done=false;
-    try{done=localStorage.getItem(k)==='1';}catch(e){}
-    if(done) return;
-
-    // ---- GOOGLE ANALYTICS 4 ----
-    gtag('event','page_view',{page_title:'Thank You',page_location:location.origin+'/?payment=success'});
-    gtag('event','purchase',{
-      transaction_id:order.payment_id,value:order.value,currency:order.currency,
-      items:[{item_id:order.package,item_name:order.item,quantity:1,price:order.value}]
-    });
-    // Google Ads conversion (optional): uncomment + add your AW-XXXX/label
-    // gtag('event','conversion',{send_to:'AW-XXXXXXXXX/XXXXXXXX',value:order.value,currency:order.currency,transaction_id:order.payment_id});
-
-    // ---- META PIXEL ----
-    // Add your Meta Pixel base code in <head> first, then uncomment:
-    // if(window.fbq){fbq('track','Purchase',{value:order.value,currency:order.currency,content_name:order.item},{eventID:order.payment_id});}
-
-    try{localStorage.setItem(k,'1');}catch(e){}
-  };
-  document.getElementById('ty-close').addEventListener('click',function(){
-    ov.style.display='none';document.body.style.overflow='';
-    try{history.replaceState(null,'','/');}catch(e){}
-  });
-  // Page refreshed on /?payment=success: show screen again (no duplicate events)
-  if(location.search.indexOf('payment=success')>-1){
-    try{window.nmShowThankYou(JSON.parse(sessionStorage.getItem('nm_order')||'null'));}catch(e){}
-  }
-})();
-</script>
 </body>
 </html>
