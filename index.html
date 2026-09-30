@@ -687,41 +687,48 @@
   }
 
 
-  /* PAYMENT THANK-YOU PAGE */
+  /* PRIVATE PAYMENT THANK-YOU PAGE */
+    /* PAYMENT THANK-YOU SCREEN */
   #paymentThankYou{
-    position:fixed;inset:0;z-index:1000;
+    position:fixed;inset:0;z-index:99999;
     display:none;align-items:center;justify-content:center;
-    padding:28px;background:var(--azul-oscuro);
+    padding:24px;
+    background:radial-gradient(circle at 50% 35%,rgba(199,162,74,.16),transparent 40%),#0B1422;
     text-align:center;
   }
   #paymentThankYou.show{display:flex;}
   .thank-you-card{
-    width:min(620px,100%);padding:52px 32px;
+    width:min(620px,100%);padding:55px 30px;
     border:1px solid rgba(199,162,74,.45);
     background:linear-gradient(145deg,rgba(15,28,46,.98),rgba(11,20,34,.98));
-    box-shadow:0 25px 80px rgba(0,0,0,.5);
+    box-shadow:0 30px 100px rgba(0,0,0,.55);
+    animation:thankYouAppear .5s ease-out;
+  }
+  @keyframes thankYouAppear{
+    from{opacity:0;transform:translateY(20px) scale(.97);}
+    to{opacity:1;transform:translateY(0) scale(1);}
   }
   .thank-you-icon{
-    width:76px;height:76px;margin:0 auto 24px;
-    border:2px solid var(--oro);border-radius:50%;
+    width:82px;height:82px;margin:0 auto 28px;
+    border:2px solid #C7A24A;border-radius:50%;
     display:flex;align-items:center;justify-content:center;
-    color:var(--oro);font-size:38px;font-weight:800;
+    color:#C7A24A;font-size:42px;font-weight:800;
+    box-shadow:0 0 35px rgba(199,162,74,.25);
   }
   .thank-you-card h1{
-    font-size:clamp(42px,8vw,68px);margin-bottom:18px;color:var(--arena);
+    font-family:'Bebas Neue',sans-serif;
+    font-size:clamp(44px,9vw,72px);
+    line-height:.95;color:#EFE6D6;
+    margin-bottom:22px;letter-spacing:.03em;
   }
   .thank-you-card p{
-    max-width:500px;margin:0 auto 12px;
-    color:rgba(239,230,214,.8);line-height:1.7;
+    max-width:500px;margin:0 auto;
+    color:rgba(239,230,214,.82);
+    font-size:16px;line-height:1.7;
   }
-  .thank-you-payment-id{
-    margin:20px auto 28px!important;color:var(--oro)!important;
-    font-size:13px;word-break:break-all;
-  }
-  .thank-you-home{
-    display:inline-block;padding:13px 25px;
-    background:var(--oro);color:var(--azul-oscuro);
-    font-weight:800;text-transform:uppercase;letter-spacing:.05em;
+  .thank-you-subtitle{
+    color:#C7A24A!important;font-weight:700;
+    font-size:18px!important;margin-bottom:14px!important;
   }
 </style>
 
@@ -745,15 +752,14 @@ src="https://www.facebook.com/tr?id=1842485520506469&ev=PageView&noscript=1"
 </head>
 <body>
 
-<!-- PAYMENT THANK-YOU PAGE -->
+<!-- PRIVATE PAYMENT THANK-YOU PAGE: hidden unless the redirect URL contains ?thankyou=1 or Razorpay success parameters -->
+<!-- HIDDEN PAYMENT THANK-YOU SCREEN -->
 <section id="paymentThankYou" aria-hidden="true">
-  <div class="thank-you-card" role="status" aria-live="polite">
+  <div class="thank-you-card">
     <div class="thank-you-icon">✓</div>
     <h1>Thank You!</h1>
-    <p><strong>Payment captured successfully.</strong></p>
-    <p>Thank you for choosing Nitin Mishra Fitness. Your payment has been received successfully. We’ll contact you shortly with the next steps for your coaching program.</p>
-    <p class="thank-you-payment-id" id="thankYouPaymentId"></p>
-    <a class="thank-you-home" href="./">Back to Website</a>
+    <p class="thank-you-subtitle">Thank You for Purchasing</p>
+    <p>You Will Receive your Selected Plan Soon.</p>
   </div>
 </section>
 
@@ -1238,47 +1244,19 @@ src="https://www.facebook.com/tr?id=1842485520506469&ev=PageView&noscript=1"
 
 
   // ---- RAZORPAY PAYMENT SUCCESS / THANK-YOU ----
-  // Razorpay Payment Link should be configured to redirect back to this page after
-  // a successful payment. Razorpay normally supplies payment-link status and ID
-  // parameters in the callback URL.
-  (function handleRazorpayPaymentSuccess(){
+  // Razorpay redirect URL:
+  // https://fitnessbynitin.com/?thankyou=1
+  (function handleRazorpayThankYou(){
     const params = new URLSearchParams(window.location.search);
-    const paymentLinkStatus = (params.get('razorpay_payment_link_status') || '').toLowerCase();
-    const paymentStatus = (params.get('payment') || '').toLowerCase();
-    const paymentId = params.get('razorpay_payment_id') || '';
 
-    // Show the thank-you page only for a paid/success callback.
-    const paymentCaptured = paymentLinkStatus === 'paid' || paymentStatus === 'success';
-    if(!paymentCaptured) return;
+    if(params.get('thankyou') !== '1') return;
 
     const thankYouPage = document.getElementById('paymentThankYou');
-    const thankYouPaymentId = document.getElementById('thankYouPaymentId');
     if(!thankYouPage) return;
-
-    if(paymentId){
-      thankYouPaymentId.textContent = 'Payment ID: ' + paymentId;
-    }else{
-      thankYouPaymentId.textContent = '';
-    }
 
     thankYouPage.classList.add('show');
     thankYouPage.setAttribute('aria-hidden','false');
     document.body.style.overflow='hidden';
-
-    // GA4 purchase event. This records the successful return; actual payment
-    // verification should still be done server-side/webhook in production.
-    if(typeof gtag === 'function'){
-      const amountMap = { '199':199, '299':299, '499':499 };
-      const amountParam = params.get('amount');
-      const value = amountMap[String(amountParam)] || Number(amountParam) || 0;
-      if(value > 0){
-        gtag('event','purchase',{
-          transaction_id: paymentId,
-          currency:'USD',
-          value:value
-        });
-      }
-    }
   })();
 
   // ---- PAGE LOADER ----
