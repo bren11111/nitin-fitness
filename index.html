@@ -907,21 +907,21 @@ src="https://www.facebook.com/tr?id=1842485520506469&ev=PageView&noscript=1"
         <div class="pkg-tier" data-en="Starter" data-hi="स्टार्टर">Starter</div>
         <h3 data-en="1 Month" data-hi="1 महीना">1 Month</h3>
         <div class="pkg-price">$199 <span>USD</span></div>
-        <ul class="pkg-features"></ul>
+        <ul class="pkg-features" data-pkg="m1"></ul>
         <a href="https://wa.me/971585243210?text=Hi%20Nitin%21%20I%27m%20interested%20in%20the%201%20Month%20Starter%20package.%20Can%20you%20tell%20me%20more%3F" class="pkg-cta" target="_blank" rel="noopener" data-en="Get Started" data-hi="शुरू करें">Get Started</a>
       </div>
       <div class="pkg-card featured reveal">
         <div class="pkg-badge" data-en="Most Popular" data-hi="सबसे लोकप्रिय">Most Popular</div>
         <h3 data-en="3 Months" data-hi="3 महीने">3 Months</h3>
         <div class="pkg-price">$299 <span>USD</span></div>
-        <ul class="pkg-features"></ul>
+        <ul class="pkg-features" data-pkg="m3"></ul>
         <a href="https://rzp.io/rzp/4NwZotmq" class="pkg-cta" target="_blank" rel="noopener" data-en="Get Started" data-hi="शुरू करें">Get Started</a>
       </div>
       <div class="pkg-card reveal">
         <div class="pkg-tier" data-en="Best Value" data-hi="बेस्ट वैल्यू">Best Value</div>
         <h3 data-en="6 Months" data-hi="6 महीने">6 Months</h3>
         <div class="pkg-price">$499 <span>USD</span></div>
-        <ul class="pkg-features"></ul>
+        <ul class="pkg-features" data-pkg="m6"></ul>
         <a href="https://wa.me/971585243210?text=Hi%20Nitin%21%20I%27m%20interested%20in%20the%206%20Months%20package.%20Can%20you%20tell%20me%20more%3F" class="pkg-cta" target="_blank" rel="noopener" data-en="Get Started" data-hi="शुरू करें">Get Started</a>
       </div>
     </div>
@@ -1170,8 +1170,16 @@ src="https://www.facebook.com/tr?id=1842485520506469&ev=PageView&noscript=1"
   // ---- LANGUAGE TOGGLE (EN / HI) ----
   const progFeaturesEN = ["Personalized diet plan","Workout plan","Weekly check-ins","Unlimited plan updates","WhatsApp support","Form analysis","Progress tracking","Supplement guidance"];
   const progFeaturesHI = ["व्यक्तिगत डाइट प्लान","वर्कआउट प्लान","साप्ताहिक चेक-इन","अनलिमिटेड प्लान अपडेट्स","व्हाट्सएप सपोर्ट","फॉर्म एनालिसिस","प्रोग्रेस ट्रैकिंग","सप्लीमेंट गाइडेंस"];
-  const pkgFeaturesEN = ["Weekly progress review","Habit coaching","Unlimited plan updates","Macro adjustments","Exercise library","Direct WhatsApp support (working hours)"];
-  const pkgFeaturesHI = ["साप्ताहिक प्रोग्रेस रिव्यू","हैबिट कोचिंग","अनलिमिटेड प्लान अपडेट्स","मैक्रो एडजस्टमेंट्स","एक्सरसाइज लाइब्रेरी","सीधा व्हाट्सएप सपोर्ट (कार्य समय में)"];
+  const pkgFeaturesEN = {
+    m1:["Personalized workout plan","Personalized diet & macros","Weekly progress review","Exercise video library","WhatsApp support (working hours)"],
+    m3:["<strong>Everything in 1 Month, plus:</strong>","Habit coaching","Unlimited plan updates","Form check via video","Macro adjustments as you progress"],
+    m6:["<strong>Everything in 3 Months, plus:</strong>","Advanced progressions & periodization","Priority WhatsApp replies","Monthly 1:1 video call","Long-term maintenance plan"]
+  };
+  const pkgFeaturesHI = {
+    m1:["व्यक्तिगत वर्कआउट प्लान","व्यक्तिगत डाइट और मैक्रोज़","साप्ताहिक प्रोग्रेस रिव्यू","एक्सरसाइज वीडियो लाइब्रेरी","व्हाट्सएप सपोर्ट (कार्य समय में)"],
+    m3:["<strong>1 महीने का सब कुछ, साथ में:</strong>","हैबिट कोचिंग","अनलिमिटेड प्लान अपडेट्स","वीडियो से फॉर्म चेक","प्रगति के अनुसार मैक्रो एडजस्टमेंट"],
+    m6:["<strong>3 महीने का सब कुछ, साथ में:</strong>","एडवांस्ड प्रोग्रेशन और पीरियडाइजेशन","प्राथमिकता व्हाट्सएप जवाब","मासिक 1:1 वीडियो कॉल","लॉन्ग-टर्म मेंटेनेंस प्लान"]
+  };
 
   function renderFeatureLists(lang){
     document.querySelectorAll('.prog-features').forEach(ul=>{
@@ -1179,7 +1187,8 @@ src="https://www.facebook.com/tr?id=1842485520506469&ev=PageView&noscript=1"
       ul.innerHTML = list.map(f=>'<li><span class="check">✅</span>'+f+'</li>').join('');
     });
     document.querySelectorAll('.pkg-features').forEach(ul=>{
-      const list = lang==='hi' ? pkgFeaturesHI : pkgFeaturesEN;
+      const set = lang==='hi' ? pkgFeaturesHI : pkgFeaturesEN;
+      const list = set[ul.getAttribute('data-pkg')] || set.m1;
       ul.innerHTML = list.map(f=>'<li>'+f+'</li>').join('');
     });
   }
