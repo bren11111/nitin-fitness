@@ -365,6 +365,9 @@
     font-size:14px;color:var(--arena);opacity:0.82;
     display:flex;align-items:flex-start;gap:8px;line-height:1.4;
   }
+  .prog-best{font-size:14px;color:var(--oro);font-style:italic;margin:-12px 0 18px;line-height:1.4;}
+  .prog-features[data-prog]{grid-template-columns:1fr;gap:10px;}
+  .prog-note{margin-top:26px;}
   .prog-features .check{
     color:var(--oro);font-weight:700;flex-shrink:0;
     margin-top:1px;
@@ -847,24 +850,29 @@ src="https://www.facebook.com/tr?id=1842485520506469&ev=PageView&noscript=1"
       <a class="prog-card reveal" href="https://wa.me/971585243210?text=Hi%20Nitin%21%20I%27m%20interested%20in%20the%20Fat%20Loss%20Transformation%20program.%20Can%20you%20tell%20me%20more%3F" target="_blank" rel="noopener">
         <div class="prog-icon">🔥</div>
         <h3 data-en="Fat Loss Transformation" data-hi="फैट लॉस ट्रांसफॉर्मेशन">Fat Loss Transformation</h3>
-        <ul class="prog-features"></ul>
+        <p class="prog-best" data-en="Best for: losing fat without losing muscle" data-hi="इनके लिए: बिना मसल खोए फैट कम करना">Best for: losing fat without losing muscle</p>
+        <ul class="prog-features" data-prog="fat"></ul>
       </a>
       <a class="prog-card reveal" href="https://wa.me/971585243210?text=Hi%20Nitin%21%20I%27m%20interested%20in%20the%20Lean%20Muscle%20Gain%20program.%20Can%20you%20tell%20me%20more%3F" target="_blank" rel="noopener">
         <div class="prog-icon">💪</div>
         <h3 data-en="Lean Muscle Gain" data-hi="लीन मसल गेन">Lean Muscle Gain</h3>
-        <ul class="prog-features"></ul>
+        <p class="prog-best" data-en="Best for: building size and strength" data-hi="इनके लिए: साइज़ और ताकत बढ़ाना">Best for: building size and strength</p>
+        <ul class="prog-features" data-prog="lean"></ul>
       </a>
       <a class="prog-card reveal" href="https://wa.me/971585243210?text=Hi%20Nitin%21%20I%27m%20interested%20in%20the%20Body%20Recomposition%20program.%20Can%20you%20tell%20me%20more%3F" target="_blank" rel="noopener">
         <div class="prog-icon">⚖️</div>
         <h3 data-en="Body Recomposition" data-hi="बॉडी रीकंपोजिशन">Body Recomposition</h3>
-        <ul class="prog-features"></ul>
+        <p class="prog-best" data-en="Best for: losing fat and building muscle at the same time" data-hi="इनके लिए: एक साथ फैट कम करना और मसल बनाना">Best for: losing fat and building muscle at the same time</p>
+        <ul class="prog-features" data-prog="recomp"></ul>
       </a>
       <a class="prog-card reveal" href="https://wa.me/971585243210?text=Hi%20Nitin%21%20I%27m%20interested%20in%20the%20Elite%201-on-1%20Coaching%20program.%20Can%20you%20tell%20me%20more%3F" target="_blank" rel="noopener">
         <div class="prog-icon">🏆</div>
         <h3 data-en="Elite 1-on-1 Coaching" data-hi="एलीट 1-ऑन-1 कोचिंग">Elite 1-on-1 Coaching</h3>
-        <ul class="prog-features"></ul>
+        <p class="prog-best" data-en="Best for: maximum results with full personal attention" data-hi="इनके लिए: पूरी पर्सनल अटेंशन के साथ बेहतरीन रिज़ल्ट">Best for: maximum results with full personal attention</p>
+        <ul class="prog-features" data-prog="elite"></ul>
       </a>
     </div>
+    <p class="pkg-note prog-note" data-en="Every program includes: personalized diet plan, workout plan, weekly check-ins and WhatsApp support." data-hi="हर प्रोग्राम में शामिल है: व्यक्तिगत डाइट प्लान, वर्कआउट प्लान, साप्ताहिक चेक-इन और व्हाट्सएप सपोर्ट।">Every program includes: personalized diet plan, workout plan, weekly check-ins and WhatsApp support.</p>
   </div>
 </section>
 
@@ -1168,8 +1176,18 @@ src="https://www.facebook.com/tr?id=1842485520506469&ev=PageView&noscript=1"
   sections.forEach(s=>linkObs.observe(s));
 
   // ---- LANGUAGE TOGGLE (EN / HI) ----
-  const progFeaturesEN = ["Personalized diet plan","Workout plan","Weekly check-ins","Unlimited plan updates","WhatsApp support","Form analysis","Progress tracking","Supplement guidance"];
-  const progFeaturesHI = ["व्यक्तिगत डाइट प्लान","वर्कआउट प्लान","साप्ताहिक चेक-इन","अनलिमिटेड प्लान अपडेट्स","व्हाट्सएप सपोर्ट","फॉर्म एनालिसिस","प्रोग्रेस ट्रैकिंग","सप्लीमेंट गाइडेंस"];
+  const progFeaturesEN = {
+    fat:["Calorie deficit plan built around foods you enjoy","Fat-burning training + daily step goals","Weekly weight & measurement tracking","Cravings & eating-out strategies","Plan to keep the weight off after"],
+    lean:["Calorie surplus plan for clean, lean gains","Hypertrophy program with progressive overload","Strength tracking on key lifts","Muscle-building meal timing & protein targets","Supplement guidance for muscle gain"],
+    recomp:["Balanced macros for losing fat and gaining muscle together","Strength training focused on body shape, not just weight","Body measurements & progress photos tracking","Plateau-breaking adjustments","Habit coaching for long-term results"],
+    elite:["Fully custom training & nutrition, adjusted weekly","Priority WhatsApp access","Detailed form review on every key exercise","Lifestyle, travel & schedule-based adjustments","Supplement & recovery guidance"]
+  };
+  const progFeaturesHI = {
+    fat:["आपकी पसंद के खाने पर बना कैलोरी डेफिसिट प्लान","फैट बर्निंग ट्रेनिंग + रोज़ाना स्टेप गोल","साप्ताहिक वज़न और माप ट्रैकिंग","क्रेविंग और बाहर खाने की रणनीतियाँ","वज़न वापस न आए, इसके लिए प्लान"],
+    lean:["क्लीन, लीन गेन के लिए कैलोरी सरप्लस प्लान","प्रोग्रेसिव ओवरलोड के साथ हाइपरट्रॉफी प्रोग्राम","मुख्य एक्सरसाइज़ में ताकत की ट्रैकिंग","मसल बनाने के लिए मील टाइमिंग और प्रोटीन टारगेट","मसल गेन के लिए सप्लीमेंट गाइडेंस"],
+    recomp:["एक साथ फैट कम करने और मसल बनाने के लिए बैलेंस्ड मैक्रोज़","सिर्फ वज़न नहीं, बॉडी शेप पर फोकस्ड स्ट्रेंथ ट्रेनिंग","बॉडी माप और प्रोग्रेस फोटो ट्रैकिंग","प्लेटो तोड़ने के लिए एडजस्टमेंट","लंबे समय के रिज़ल्ट के लिए हैबिट कोचिंग"],
+    elite:["पूरी तरह कस्टम ट्रेनिंग और न्यूट्रिशन, हर हफ्ते एडजस्ट","प्राथमिकता व्हाट्सएप एक्सेस","हर मुख्य एक्सरसाइज़ पर डिटेल्ड फॉर्म रिव्यू","लाइफस्टाइल, ट्रैवल और शेड्यूल के अनुसार एडजस्टमेंट","सप्लीमेंट और रिकवरी गाइडेंस"]
+  };
   const pkgFeaturesEN = {
     m1:["Personalized workout plan","Personalized diet & macros","Weekly progress review","Exercise video library","WhatsApp support (working hours)"],
     m3:["<strong>Everything in 1 Month, plus:</strong>","Habit coaching","Unlimited plan updates","Form check via video","Macro adjustments as you progress"],
@@ -1183,7 +1201,8 @@ src="https://www.facebook.com/tr?id=1842485520506469&ev=PageView&noscript=1"
 
   function renderFeatureLists(lang){
     document.querySelectorAll('.prog-features').forEach(ul=>{
-      const list = lang==='hi' ? progFeaturesHI : progFeaturesEN;
+      const set = lang==='hi' ? progFeaturesHI : progFeaturesEN;
+      const list = set[ul.getAttribute('data-prog')] || set.fat;
       ul.innerHTML = list.map(f=>'<li><span class="check">✅</span>'+f+'</li>').join('');
     });
     document.querySelectorAll('.pkg-features').forEach(ul=>{
